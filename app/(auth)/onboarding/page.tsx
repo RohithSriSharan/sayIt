@@ -1,10 +1,11 @@
 import AccountProfile from "@/components/forms/AccountProfile";
 import { currentUser } from "@clerk/nextjs";
-
+import { fetchUser } from "@/lib/actions/user.actions";
 
 const Page = async () => {
   const user = await currentUser();
-  const userInfo = {};
+  if (!user) return null;
+  const userInfo = await fetchUser(user.id);
 
   const userData = {
     id: user?.id,
@@ -21,10 +22,12 @@ const Page = async () => {
       <p className="mt-3 text-base-regular text-light-2">Complete your profile to continue</p>
 
       <section className="mt-9 bg-dark-2 p-10">
-        <AccountProfile user={userData} btnTitle="Continue" />
+        <AccountProfile user ={userData} btnTitle="Continue" />
       </section>
     </main>
   );
 };
 
 export default Page;
+
+

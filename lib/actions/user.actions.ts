@@ -44,3 +44,17 @@ export async function updateUser({
         console.log(error)
     }
 }
+
+
+export async function fetchUser(userId:string){
+    try{
+        connectDB();
+        return await User.findOne({id: userId})
+        // .populate({
+        //     path:'communities',
+        //     model: Community
+        // })
+    }catch(error){
+        console.log(error)
+    }
+}
