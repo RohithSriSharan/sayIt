@@ -8,7 +8,7 @@ const Page = async () => {
   const userInfo = await fetchUser(user.id);
 
   const userData = {
-    id: user?.id,
+    id: user.id,
     objectId: userInfo?._id,
     username: userInfo?.username || user?.username,
     name:userInfo?.name || user?.firstName || "",
